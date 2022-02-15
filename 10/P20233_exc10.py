@@ -28,13 +28,9 @@ for i in byte_array:
 #prints the binlist
 print(binlist)
 
-#the requests of the excersise req0 = number of the hexadecimal
-req0 = 0
-req1 = 0
-req2 = 0
-req3 = 0
-req4 = 0
 
+#reuse of binlist
+binlist = ""
 #turns the byte array to numbers as per the excersise request
 for i in byte_array:
     x = str(bin(i))
@@ -45,15 +41,33 @@ for i in byte_array:
         x = ("0" * dist) + x
     #pics the first and last 2 digits
     x = x[:2] + x[-2:]
-    #turns x into a interer
-    x = int(x, 2)
-    # turns x into hexadecimal and prints it
-    x = hex(x)
-    print(x)
-    #turns it back to decimal to do the calculations required
-    x = int(x,16)
-    #finds the number of request fulfiled by the number
+    #adds them to the list
+    binlist += x
+
+
+
+print(binlist)
+
+
+#times needed to run the multiplication
+while(len(binlist) % 16 != 0 ):
+    #makes sure that len(binlist)/16 will be an int
+    #the list is with increments of 4 characters so I only have ta add 4 0 every time
+    binlist += "0000"
+times = int(len(binlist) / 16) - 1
+
+#the requests of the excersise req0 = number of the hexadecimal
+req0 = 0
+req1 = 0
+req2 = 0
+req3 = 0
+req4 = 0
+#checks if the numbers fill the requirements
+for i in range(times):
     req0 += 1
+    x = binlist[(16 * req0) :16 * (req0 + 1)]
+    print(x)
+    x = int(x, 2)
     if(( x % 2 ) == 0):
         req1 += 1
     if(( x % 3 ) == 0):
@@ -62,6 +76,19 @@ for i in byte_array:
         req3 += 1
     if(( x % 7 ) == 0):
         req4 += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #finds the percentages
 req1 = (req1 / req0) * 100
